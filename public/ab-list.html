@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <title>亭穎的網站</title>
+  </head>
+  <body>
+    <style>
+      nav.navbar .navbar-nav .nav-link.active {
+        border-radius: 6px;
+        background-color: rgb(13, 110, 253);
+        color: white;
+        font-weight: 800;
+      }
+    </style>
+    <div class="container"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <!-- <li class="page-item active">
+                <a class="page-link" href="?page=1">1</a>
+              </li> -->
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>編號</th>
+                <th>姓名</th>
+                <th>email</th>
+                <th>手機</th>
+                <th>生日</th>
+                <th>創建日期</th>
+                <th>地址</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr>
+                <td>1020</td>
+                <td>sdfdfg</td>
+                <td>fsdf@sdfs.com</td>
+                <td>0918357483</td>
+                <td>2023-10-04</td>
+                <td>dfgvsd</td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="http://localhost:3002/jquery/jquery.min.js"></script>
+    <script src="http://localhost:3002/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
+    <script>
+      const tbody = document.querySelector("tbody");
+      const pagination = document.querySelector(".pagination");
+      const pageItem = ({ i, page, totalPages }) => {
+        if (i >= 1 && i <= totalPages) {
+          return `
+            <li class="page-item ${i === page ? "active" : ""}">
+              <a class="page-link" href="?page=${i}" 
+              onclick="gotoPage(event, ${i})">${i}</a>
+            </li>`;
+        } else {
+          return "";
+        }
+      };
+      const tableRow = ({ sid, name, email, mobile, birthday, created_at, address }) => {
+        return` 
+        <tr>
+          <td>${sid}</td>
+          <td>${name}</td>
+          <td>${email}</td>
+          <td>${mobile}</td>
+          <td>${ dayjs(birthday).format('YYYY-MM-DD')}</td>
+          <td>${ dayjs(created_at).format("YYYY-MM-DD HH:mm:ss")}</td>
+          <td>${address}</td>
+        </tr>`;
+      };
+
+      const gotoPage = (event, p) => {
+        event.preventDefault(); // 不要觸發 a tag href不跳頁
+
+        history.pushState(null, null, `?page=${p}`); //不刷頁面跳轉
+        renderPage(`?page=${p}`);
+        console.log({ p });
+      };
+
+      function renderPage(qs){ //querystring
+      fetch(`http://localhost:3002/address-book/api` + qs) //前端頁面透過APi跟後端要資料(透過AJAX拿到資料後把畫面生出來)
+      .then((r) => r.json())
+          .then((data) => {
+            console.log(data);
+            const { page, totalPages } = data;
+
+          /*let str = "";
+          for (let i = page - 5; i <= page + 5; i++){
+            str += pageItem({ i, page, totalPages}); //決定要接上哪些形式參數
+          }
+          pagination.innerHTML = str; for迴圈改成下方map用法
+          */
+
+          pagination.innerHTML = Array(11) //長度為11的array
+          .fill(1) //填滿為1的數值
+          .map((value, index) =>  //第一個為value,第二個為index，省略大括號&return
+          pageItem({ i: page - 5 + index, page, totalPages })
+              )
+              .join("");
+
+              tbody.innerHTML = data.rows.map((row) => tableRow(row)).join("");
+          })
+          .catch((ex) => console.log(ex));
+      }
+      renderPage(location.search); //呼叫
+
+      window.addEventListener("popstate", event => {  //觸發按鈕換上下頁，內容跟著改變
+
+        renderPage(location.search);
+      });
+
+    </script>
+  </body>
+</html>

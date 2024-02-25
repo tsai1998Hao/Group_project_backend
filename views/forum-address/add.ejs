@@ -1,0 +1,111 @@
+<!-- home.ejs複製來的 -->
+<%- include('../parts/html-head') %>
+<!-- ejs的include function,要用-號,現在是ejs要引入其他的ejs,這時候要用相對路徑 -->
+<%- include('../parts/navbar') %>
+
+
+<!-- 這行code可以把網頁變成json來除錯 -->
+<!-- <%- JSON.stringify(locals, null, 4)%> -->
+<!-- 這行code可以把網頁變成json來除錯 -->
+
+
+<div class="container">
+  <div>這裡是新增文章的~~~~</div>
+
+
+<div class="row">
+    <div class="col-6">
+
+
+      <div class="card">
+
+        <div class="card-body">
+          <h5 class="card-article_title_name">新增資料</h5>
+
+
+          <form name="form1" onsubmit="sendForm(event)">
+
+            <!-- <div class="mb-3">
+              <label for="article_id" class="form-label">article_id</label>
+              <input type="text" class="form-control" id="article_id" name="article_id">
+              <div class="form-text"></div>
+            </div> -->
+
+
+            <!-- <div class="mb-3">
+              <label for="article_member_id" class="form-label">article_member_id</label>
+              <input type="text" class="form-control" id="article_member_id" name="article_member_id">
+              <div class="form-text"></div>
+            </div> -->
+
+            <div class="mb-3">
+              <label for="article_boardcategory_name" class="form-label">article_boardcategory_name</label>
+              <input type="text" class="form-control" id="article_boardcategory_name" name="article_boardcategory_name">
+              <div class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="article_title_name" class="form-label">article_title_name</label>
+              <input type="text" class="form-control" id="article_title_name" name="article_title_name">
+              <div class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="article_content" class="form-label">article_content</label>
+              <textarea id="article_content" class="form-control" name="article_content" cols="30" rows="7"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+
+        </div>
+      </div>
+
+    </div>
+</div>
+
+
+
+
+</div>
+
+
+<%- include('../parts/scripts') %>
+
+
+<script>
+function sendForm(e){
+  e.preventDefault();
+  //要做資料檢查
+  const fd = new FormData(document.form1);
+  const usp = new URLSearchParams(fd);
+  const dataObj =Object.fromEntries(fd);
+  fetch(``, {
+    method:'POST',
+    body:fd, //multipart/form-data
+
+    /*
+    body: usp.toString(), //2. application/x-www-form-urlencoded
+    headers:{
+      'article_content-Type':'application/x-www-form-urlencoded',
+    }
+    */
+
+    /*
+    body: JSON.stringify(dataObj), //3. application/json
+    headers:{
+      'article_content-Type':'application/json',
+    }
+*/
+  })
+  .then(r=>r.json())
+  .then((data)=>{
+    console.log(data);
+  })
+.catch((ex)=> console.log(ex));
+}
+
+</script>
+
+<%- include('../parts/html-foot') %>

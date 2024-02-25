@@ -1,0 +1,39 @@
+<!-- 搜尋 -->
+<div class="row">
+    <div class="col-6">
+      <form name="searchForm" class="d-flex" role="search">
+        <input class="form-control me-2" type="search" name="keyword" value="<%= qs.keyword ?? '' %>" placeholder="Search" aria-label="Search">
+  <!-- 日期搜尋 --><!-- 日期搜尋 --><!-- 日期搜尋 --><!-- 日期搜尋 -->
+        <!-- <input type="date" class="form-control me-2" name="startDate" value="<%= qs.startDate ?? '' %>">
+        <input type="date" class="form-control me-2" name="endDate" value="<%= qs.endDate ?? '' %>"> -->
+  
+  <!-- 日期搜尋 --><!-- 日期搜尋 --><!-- 日期搜尋 --><!-- 日期搜尋 -->
+  
+  
+  <!-- 日期搜尋 --><!-- 日期搜尋 --><!-- 日期搜尋 --><!-- 日期搜尋22222 -->
+  <input type="hidden" name="startDate" value="<%= qs.startDate ?? '' %>">
+  <input type="hidden" name="endDate" value="<%= qs.endDate ?? '' %>">
+  
+  
+  
+  
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  
+    <div class="col-6">
+      <select class="form-control" id="selectDateRange" onchange="dateRangeChange(event)">
+        <option value="">全部</option>
+        <option value="1">1985 ~ 1987</option>
+        <option value="2">1988 ~ 1990</option>
+        <option value="3">1991 ~ 1993</option>
+        <option value="4">1994 ~ 1996</option>
+        <option value="5">1997 ~ 1999</option>
+      </select>
+    </div>
+  <!-- 日期搜尋 --><!-- 日期搜尋 --><!-- 日期搜尋 --><!-- 日期搜尋22222 -->
+  
+  </div>
+  
+  <!-- 搜尋 -->
+  

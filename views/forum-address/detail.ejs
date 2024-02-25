@@ -1,0 +1,79 @@
+<!-- home.ejs複製來的 -->
+<%- include('../parts/html-head') %>
+<!-- ejs的include function,要用-號,現在是ejs要引入其他的ejs,這時候要用相對路徑 -->
+<%- include('../parts/navbar') %>
+
+
+
+
+<div class="container">
+  <div>別害羞讓傑哥</div>
+
+
+<div class="row">
+    <div class="col-6">
+
+
+      <div class="card">
+
+        <div class="card-body">
+          <h5 class="card-title">傑哥來細看</h5>
+
+
+          <form name="form1" onsubmit="sendForm(event)">
+             <input type="hidden" name="article_id" value="<%= article_id %>">
+
+
+
+
+
+            <div class="mb-3">
+              <label for="article_boardcategory_name" class="form-label">article_boardcategory_name</label>
+              <div  id="article_boardcategory_name" name="article_boardcategory_name"><%= article_boardcategory_name %></div>
+              <div class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="article_title_name" class="form-label">article_title_name</label>
+              <div  id="article_title_name" name="article_title_name" value=""><%= article_title_name %></div>
+              <div class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="article_content" class="form-label">article_content</label>
+              <!-- 修改時資料部會顯示!!!! --><!-- 修改時資料部會顯示!!!! -->
+              <div 
+              id="article_content"  
+              name="article_content" 
+              cols="30" rows="7"><%= article_content %></div>
+            </div>
+              <!-- 修改時資料部會顯示!!!! --><!-- 修改時資料部會顯示!!!! -->
+
+
+            <button type="" class="btn btn-primary">不能改，只能給你看</button>
+          </form>
+
+
+        </div>
+      </div>
+
+    </div>
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<%- include('../parts/scripts') %>
+
+
+<%- include('../parts/html-foot') %>

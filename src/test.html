@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Document</title>
+</head>
+<script src="https://unpkg.com/vue@2.7.14/dist/vue.js"></script>
+
+<body>
+    
+<div id="myKingdom">
+        {{message}}
+{{message}}
+{{message}}
+{{message}}
+{{message}}
+{{message}}
+{{jj}}
+
+
+<input type="text" v-model="message">
+
+<li v-for="yumm in food">
+{{yumm}}
+</li>
+
+</div>
+
+
+<script>
+
+var app =new Vue(
+    {el:'#myKingdom',
+     data:{
+        message:'hello world!!',
+        jj:'fuck',
+        food:['chips,coke,meat'],
+     }
+    });
+
+
+
+</script>
+
+
+</body>
+</html>
