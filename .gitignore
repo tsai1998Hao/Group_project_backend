@@ -4,9 +4,9 @@
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 # Node artifact files
+test.html/
 node_modules/
 dist/
-test.html/
 
 tmp_uploads
 public/img
